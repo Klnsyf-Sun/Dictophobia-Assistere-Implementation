@@ -198,7 +198,7 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rsts;
 		sql.append("SELECT uid FROM users WHERE isOnline=1");
 		rsts = stmt.executeQuery(sql.toString());
-		if (rsts.next()) {
+		if (!rsts.next()) {
 			MySQL.close();
 			return null;
 		} else {

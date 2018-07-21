@@ -1,4 +1,4 @@
-package com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service;
+package com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.user;
 
 import java.sql.Blob;
 import java.sql.SQLException;

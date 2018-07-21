@@ -1,5 +1,7 @@
 package com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.dto;
 
+import java.sql.Timestamp;
+
 public class Message {
 	private int mid = -1;
 	private int postBy;
@@ -7,12 +9,12 @@ public class Message {
 	private String shell;
 	private String ghost;
 	private boolean hasGhost = false;
-	private String time;
-	private String duration = null;
+	private Timestamp time = null;
+	private int duration = 0;
 	private boolean showDuration;
 
-	public Message(int mid, int postBy, int getBy, String shell, String ghost, boolean hasGhost, String time,
-			String duration, boolean showDuration) {
+	public Message(int mid, int postBy, int getBy, String shell, String ghost, boolean hasGhost, Timestamp time,
+			int duration, boolean showDuration) {
 		this.mid = mid;
 		this.postBy = postBy;
 		this.getBy = getBy;
@@ -24,15 +26,15 @@ public class Message {
 		this.showDuration = showDuration;
 	}
 
-	public Message(int postBy, int getBy, String shell, String ghost, String time, String duration,
+	public Message(int postBy, int getBy, String shell, String ghost, boolean hasGhost, int duration,
 			boolean showDuration) {
 		this.mid = -1;
 		this.postBy = postBy;
 		this.getBy = getBy;
 		this.shell = shell;
 		this.ghost = ghost;
-		this.hasGhost = ghost == null ? true : false;
-		this.time = time;
+		this.hasGhost = hasGhost;
+		this.time = null;
 		this.duration = showDuration ? duration : null;
 		this.showDuration = showDuration;
 
@@ -86,19 +88,19 @@ public class Message {
 		this.hasGhost = hasGhost;
 	}
 
-	public String getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(Timestamp time) {
 		this.time = time;
 	}
 
-	public String getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 
