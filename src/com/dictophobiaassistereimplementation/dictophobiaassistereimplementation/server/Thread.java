@@ -18,9 +18,11 @@ import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.message.MessageGetter;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.message.MessageReceiver;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.user.UserDelete;
+import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.user.UserLogin;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.user.UserQuery;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.user.UserRegister;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.user.UserUpdate;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -35,12 +37,15 @@ public class Thread implements Runnable {
 	}
 
 	public void run() {
+		System.out.println("NEW THREAD!");
 		try {
 			BufferedReader buf = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			PrintStream cout = new PrintStream(client.getOutputStream());
 			JsonParser parser = new JsonParser();
 			JsonObject object;
 			String str = buf.readLine();
+			System.out.println(str);
+
 			if (str == null) {
 			} else {
 				object = (JsonObject) parser.parse(str);
@@ -62,6 +67,12 @@ public class Thread implements Runnable {
 						case "register":
 							User user = gson.fromJson(object, User.class);
 							cout.println(UserRegister.getInstance().register(user));
+							break;
+
+						case "login":
+							username = object.get("username").getAsString();
+							password = object.get("password").getAsString();
+							cout.print(UserLogin.getInstance().login(username, password));
 							break;
 
 						case "queryByUid":
