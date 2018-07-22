@@ -11,4 +11,6 @@ public interface DictionaryDAO {
 	public List<Dictionary> queryDictionarybyUid(int uid) throws SQLException;
 
 	public boolean updateDictionaryContent(int did, String content) throws SQLException;
+
+	public boolean deleteDictionary(int did) throws SQLException;
 }

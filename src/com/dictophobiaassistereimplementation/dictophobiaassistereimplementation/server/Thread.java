@@ -12,6 +12,7 @@ import java.util.List;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.dto.Dictionary;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.dto.Message;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.dto.User;
+import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.dictionary.DictionaryDelete;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.dictionary.DictionaryInsert;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.dictionary.DictionaryQueryByUid;
 import com.dictophobiaassistereimplementation.dictophobiaassistereimplementation.service.dictionary.DictionaryUpdateContent;
@@ -161,6 +162,9 @@ public class Thread implements Runnable {
 							content = object.get("content").getAsString();
 							cout.println(DictionaryUpdateContent.getInstance().updateContent(did, content));
 							break;
+						case "delete":
+							did = object.get("did").getAsInt();
+							cout.println(DictionaryDelete.getInstance().delete(did));
 						default:
 							cout.println(-1);
 							break;

@@ -72,4 +72,24 @@ public class DictionaryDAOImpl implements DictionaryDAO {
 		}
 	}
 
+	@Override
+	public boolean deleteDictionary(int did) throws SQLException {
+		StringBuffer sql = new StringBuffer();
+		Connection conn = MySQL.getConnection();
+		Statement stmt = conn.createStatement();
+		ResultSet rsts;
+		sql.append("SELECT did FROM dictionaries WHERE did=").append(did);
+		rsts = stmt.executeQuery(sql.toString());
+		if (!rsts.next()) {
+			MySQL.close();
+			return false;
+		} else {
+			sql.setLength(0);
+			sql.append("DELETE FROM dictionaries WHERE did=").append(did);
+			stmt.execute(sql.toString());
+			MySQL.close();
+			return true;
+		}
+	}
+
 }
